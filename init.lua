@@ -1,5 +1,6 @@
 
 require('plugins')
+require('options')
 require('simple_setup')
 require('telescope_config')
 require('cmp_config')
@@ -8,5 +9,5 @@ require('mason_config')
 require('lsp_config')
 require('treesitter_config')
 require('globals')
-require('options')
 require('keymaps')
+require('vimapi')

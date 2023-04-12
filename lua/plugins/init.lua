@@ -124,7 +124,7 @@ require('lazy').setup({
     -- end,
 
   },
-  {'neoclide/coc.nvim'},
+  -- {'natebosch/vim-lsc'},
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -301,6 +301,7 @@ require('lazy').setup({
       })
     end,
   },
+  {"mbbill/undotree"},
 
 
 }, {})

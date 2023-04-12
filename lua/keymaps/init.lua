@@ -11,6 +11,7 @@ vim.keymap.set('n', '<Leader>b', ':Neotree toggle filesystem right <CR>', { sile
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 
 

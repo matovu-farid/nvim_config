@@ -1,3 +1,5 @@
+
+local lspconfig = require('lspconfig')
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -12,4 +14,5 @@ local servers = {
     },
   },
 }
+
 return servers

@@ -1,5 +1,5 @@
 # Nvim Configuration
-This repo contains configuration files formy neovim editor.😊
+This repo contains configuration files formy neovim editor.
 Lua is was used and it is easy to follow. You are free to adopt it and use it.
 Just give me a like
 

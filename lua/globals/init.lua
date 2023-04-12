@@ -6,3 +6,8 @@ vim.g.fzf_command_prefix = 'Rg'
 vim.g.fzf_rg_option = '--hidden --smart-case'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+-- init.lua
+vim.g.lsc_server_commands = {dart = 'dart_language_server'}
+vim.g.lsc_auto_map = {defaults= true, GoToDefinition = 'gd'}
+
