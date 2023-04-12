@@ -1,0 +1,21 @@
+
+{
+  "languageserver": {
+    "dart": {
+      "command": "dart",
+      "args": [
+        "/usr/local/Caskroom/flutter/3.3.10/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot",
+        "--lsp"
+      ],
+      "filetypes": ["dart"],
+      "rootPatterns": [".git", "pubspec.yaml", ".packages"],
+      "initializationOptions": {
+        "closingLabels": true,
+        "outline": true,
+        "flutterOutline": true
+      }
+    }
+  },
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.source.buffer.disableSyntaxes": ["dart"]
+}
