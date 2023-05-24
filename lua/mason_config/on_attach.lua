@@ -13,26 +13,26 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
-  -- remap Escape in to jj
-  vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
+  -- remap Escape in to jk
+  vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 
 
   -- rempmap j and k to navigate through completion menu
-  vim.keymap.set('i', 'C-j', 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true })
-  vim.keymap.set('i', 'C-k', 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true })
+  vim.keymap.set('i', '<C-j>', 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true })
+  vim.keymap.set('i', '<C-k>', 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true })
 
   -- Install CtrlSF plugin with the 'lazy' package manager
 
   -- CtrlSF key mappings
 
 
-  vim.keymap.set('n', '<Leader>ff', '<Plug>CtrlSFPrompt', {})
-  vim.keymap.set('v', '<Leader>ff', '<Plug>CtrlSFVwordPath', {})
+  vim.keymap.set('n', '<Leader>sf', '<Plug>CtrlSFPrompt', {})
+  vim.keymap.set('v', '<Leader>sf', '<Plug>CtrlSFVwordPath', {})
   vim.keymap.set('v', '<Leader>F', '<Plug>CtrlSFVwordExec', {})
-  vim.keymap.set('n', '<Leader>fn', '<Plug>CtrlSFCwordPath', {})
-  vim.keymap.set('n', '<Leader>fp', '<Plug>CtrlSFPwordPath', {})
-  vim.keymap.set('n', '<Leader>fo', ':CtrlSFOpen<CR>', { noremap = true, silent = true })
-  vim.keymap.set('n', '<Leader>ft', ':CtrlSFToggle<CR>', { noremap = true, silent = true })
+  vim.keymap.set('n', '<Leader>sn', '<Plug>CtrlSFCwordPath', {})
+  vim.keymap.set('n', '<Leader>sp', '<Plug>CtrlSFPwordPath', {})
+  vim.keymap.set('n', '<Leader>so', ':CtrlSFOpen<CR>', { noremap = true, silent = true })
+  vim.keymap.set('n', '<Leader>st', ':CtrlSFToggle<CR>', { noremap = true, silent = true })
   -- vim.keymap.set('i', '<Leader>ft', '<Esc>:CtrlSFToggle<CR>', { noremap = true, silent = true })
 
 

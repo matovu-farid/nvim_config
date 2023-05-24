@@ -1,4 +1,5 @@
 
+vim.o.guicursor = "n-v-c:block-Cursor/lCursor"
 vim.o.completeopt = 'menuone,noselect'
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -36,3 +37,5 @@ vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
+
+vim.wo.foldmethod = "syntax"

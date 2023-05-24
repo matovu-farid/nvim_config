@@ -20,11 +20,11 @@ require('copilot').setup({
     auto_trigger = true,
     debounce = 75,
     keymap = {
-      accept = "<Tab><Leader>",
+      accept = "<C-y>",
       accept_word = false,
       accept_line = false,
-      next = "<M-]>",
-      prev = "<M-[>",
+      next = "<Down>",
+      prev = "<Up>",
       dismiss = "<C-]>",
     },
   },
@@ -42,3 +42,4 @@ require('copilot').setup({
   copilot_node_command = 'node', -- Node.js version must be > 16.x
   server_opts_overrides = {},
 })
+

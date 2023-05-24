@@ -1,4 +1,3 @@
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -29,7 +28,8 @@ require('lazy').setup({
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
-  { -- LSP Configuration & Plugins
+  {
+    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -38,40 +38,37 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
-      {'nvim-lua/plenary.nvim'},
-     {
-    'akinsho/flutter-tools.nvim',
-    lazy = false,
-    dependencies = {
-        'nvim-lua/plenary.nvim',
-        'stevearc/dressing.nvim', -- optional for vim.ui.select
-    },
-}, { "lukas-reineke/indent-blankline.nvim" },
-      { "akinsho/toggleterm.nvim",
+      { 'j-hui/fidget.nvim',    opts = {} },
+      { 'nvim-lua/plenary.nvim' },
+      {
+        'akinsho/flutter-tools.nvim',
+        lazy = false,
+        dependencies = {
+          'nvim-lua/plenary.nvim',
+          'stevearc/dressing.nvim', -- optional for vim.ui.select
+        },
+      }, { "lukas-reineke/indent-blankline.nvim" },
+      {
+        "akinsho/toggleterm.nvim",
         config = function()
           require("toggleterm").setup({
             direction = 'float',
 
           })
-        end },
+        end
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
   },
 
-  { -- Autocompletion
+  {
+    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
-  { "windwp/nvim-autopairs" },
-  {
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-  },
+
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -92,8 +89,9 @@ require('lazy').setup({
   { "m4xshen/autoclose.nvim" },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  { 'folke/which-key.nvim',   opts = {} },
+  {
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -116,7 +114,8 @@ require('lazy').setup({
 
   },
 
-  { -- Theme inspired by Tokyonight
+  {
+    -- Theme inspired by Tokyonight
     'folke/tokyonight.nvim',
     priority = 1000,
     -- config = function()
@@ -141,7 +140,8 @@ require('lazy').setup({
     end,
   },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -154,7 +154,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -164,7 +165,7 @@ require('lazy').setup({
   },
   { 'dart-lang/dart-vim-plugin' },
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -210,7 +211,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -221,18 +223,19 @@ require('lazy').setup({
   },
   -- Github copilot
   { 'zbirenbaum/copilot.lua' },
-  { -- Neotree
+  {
+    -- Neotree
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
-            {
+      {
         -- only needed if you want to use the commands with "_with_window_picker" suffix
         's1n7ax/nvim-window-picker',
         tag = "v1.*",
         config = function()
-          require'window-picker'.setup({
+          require 'window-picker'.setup({
             autoselect_one = true,
             include_current = false,
             filter_rules = {
@@ -253,9 +256,9 @@ require('lazy').setup({
 
     config = function()
       require("neo-tree").setup({
-         auto_open = 0,
+        auto_open = 0,
 
-        use_libuv_file_watcher=true,
+        use_libuv_file_watcher = true,
         close_if_last_window = true,
         window = {
           width = 30,
@@ -277,13 +280,11 @@ require('lazy').setup({
               "thumbs.db"
             },
             position = "right",
-            
+
           },
         },
-       
+
       })
-
-
     end,
 
 
@@ -301,8 +302,26 @@ require('lazy').setup({
       })
     end,
   },
-  {"mbbill/undotree"},
+  { "mbbill/undotree" },
+  { 'neovim/nvim-lspconfig' },
+  { 'jose-elias-alvarez/null-ls.nvim' },
+  { 'MunifTanjim/prettier.nvim' },
+  { 'maxmellon/vim-jsx-pretty' },
+  { 'mfussenegger/nvim-dap' },
+  {
+    'theHamsta/nvim-dap-virtual-text'
+  },
+  {
+    'rcarriga/nvim-dap-ui',
+    config = function()
+      require("neodev").setup({
+        library = { plugins = { "nvim-dap-ui" }, types = true },
+      })
+    end
+  }
+
+
+
 
 
 }, {})
-
