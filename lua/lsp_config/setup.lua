@@ -18,7 +18,7 @@ lspconfig.dartls.setup {
     -- Map 'K' to Hover
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     -- Map '<C-k>' to SignatureHelp
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<Tab>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     -- Map '<leader>rn' to Rename
     buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   end

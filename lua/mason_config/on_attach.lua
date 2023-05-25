@@ -17,9 +17,7 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 
 
-  -- rempmap j and k to navigate through completion menu
-  vim.keymap.set('i', '<C-j>', 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true })
-  vim.keymap.set('i', '<C-k>', 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true })
+
 
   -- Install CtrlSF plugin with the 'lazy' package manager
 
@@ -59,7 +57,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<Tab>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
