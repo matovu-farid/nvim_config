@@ -214,6 +214,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate markdown markdown_inline',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -318,6 +319,62 @@ require('lazy').setup({
         library = { plugins = { "nvim-dap-ui" }, types = true },
       })
     end
+  },
+  { "mxsdev/nvim-dap-vscode-js" },
+  {
+    'microsoft/vscode-js-debug',
+    build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+  },
+  {
+    "akinsho/bufferline.nvim",
+    config = function()
+      vim.opt.termguicolors = true
+      require("bufferline").setup {
+        options = {
+          separator_style = "slant"
+        },
+        groups = {
+          options = {
+            toggle_hidden_on_enter = true -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+          },
+          items = {
+            {
+              name = "Tests",                        -- Mandatory
+              highlight = { underline = true, sp = "blue" }, -- Optional
+              priority = 2,                          -- determines where it will appear relative to other groups (Optional)
+              icon = "",                          -- Optional
+              matcher = function(buf)                -- Mandatory
+                return buf.filename:match('%_test') or buf.filename:match('%_spec')
+              end,
+            },
+            {
+              name = "Docs",
+              highlight = { undercurl = true, sp = "green" },
+              auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+              matcher = function(buf)
+                return buf.filename:match('%.md') or buf.filename:match('%.txt')
+              end,
+              separator = { -- Optional
+                style = require('bufferline.groups').separator.tab
+              },
+            }
+          }
+        }
+
+      }
+    end
+  },
+  {
+    "glepnir/lspsaga.nvim",
+    event = "LspAttach",
+    config = function()
+      require("lspsaga").setup({})
+    end,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      --Please make sure you install markdown and markdown_inline parser
+      { "nvim-treesitter/nvim-treesitter" }
+    }
   }
 
 

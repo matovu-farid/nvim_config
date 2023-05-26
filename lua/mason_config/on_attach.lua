@@ -1,4 +1,3 @@
-
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
@@ -16,7 +15,7 @@ local on_attach = function(_, bufnr)
   -- remap Escape in to jk
   vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 
-
+  local keymap = vim.keymap.set
 
 
   -- Install CtrlSF plugin with the 'lazy' package manager
@@ -39,24 +38,33 @@ local on_attach = function(_, bufnr)
 
   -- CtrlSF configuration
   -- create a shortcut to :ToggleTerm
-  nmap('<leader>t', require('toggleterm').toggle, 'Toggle terminal')
+  nmap('<leader>t', "<cmd>Lspsaga term_toggle<CR>", 'Toggle terminal')
 
   -- add shortcut to toggle neo tree
   nmap('<leader>b', ":Neotree toggle filesystem right<CR>", 'Toggle NeoTree')
+  nmap("[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "diagnostic jump prev")
+  nmap("]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", "diagnostic jump next")
 
+  -- Diagnostic jump with filters such as only jumping to an error
+  keymap("n", "[E", function()
+    require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  end)
+  keymap("n", "]E", function()
+    require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+  end)
+  nmap('<leader>rn', "<cmd>Lspsaga rename<CR>", '[R]e[n]ame')
+  nmap('<leader>ca', "<cmd>Lspsaga code_action<CR>", '[C]ode [A]ction')
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gd', "<cmd>Lspsaga goto_definition<CR>", '[G]oto [D]efinition')
+  nmap('gt', "<cmd>Lspsaga peek_type_definition<CR>", '[G]oto [T]ype')
+  nmap('gr', "<cmd>Lspsaga rename ++project<CR>", '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
+  nmap("gp", "<cmd>Lspsaga peek_definition<CR>", "Peek definition")
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('K', "<cmd>Lspsaga hover_doc<CR>", 'Hover Documentation')
   nmap('<Tab>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
@@ -72,4 +80,4 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
-return on_attach       
+return on_attach

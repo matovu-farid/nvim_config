@@ -9,7 +9,6 @@ vim.keymap.set('n', '<Leader>lf', ':Format<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>b', ':Neotree toggle filesystem right <CR>', { silent = true })
 vim.keymap.set('n', '<Leader>x', ':so ~/.config/nvim/init.lua',{})
 
-
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
