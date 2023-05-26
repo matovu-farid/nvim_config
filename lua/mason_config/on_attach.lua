@@ -56,7 +56,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ca', "<cmd>Lspsaga code_action<CR>", '[C]ode [A]ction')
 
   nmap('gd', "<cmd>Lspsaga goto_definition<CR>", '[G]oto [D]efinition')
-  nmap('gt', "<cmd>Lspsaga peek_type_definition<CR>", '[G]oto [T]ype')
+  nmap('gT', "<cmd>Lspsaga peek_type_definition<CR>", '[G]oto [T]ype')
   nmap('gr', "<cmd>Lspsaga rename ++project<CR>", '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')

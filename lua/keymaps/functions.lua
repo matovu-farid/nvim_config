@@ -19,14 +19,3 @@ function delete_and_refresh()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>df", ":delete_and_refresh()<CR>", { noremap = true })
-local group = vim.api.nvim_create_augroup("RunMain", { clear = true })
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "main.py" },
-  callback = function(ev)
-    print "Running main.py"
-    local filename = vim.fn.expand("%")
-    vim.api.nvim_command("!python3 " .. filename)
-
-  end
-})
