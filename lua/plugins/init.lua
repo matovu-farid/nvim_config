@@ -349,7 +349,8 @@ require('lazy').setup({
       --Please make sure you install markdown and markdown_inline parser
       { "nvim-treesitter/nvim-treesitter" }
     }
-  }
+  },
+  {"ThePrimeagen/harpoon"}
 
 
 
