@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
     end
     vim.api.nvim_command("NeoTreeClose")
     vim.api.nvim_command("Copilot disable")
-        print('Algorithms are lit2')
+    vim.api.nvim_command("!source venv/bin/activate")
 
     vim.schedule(function()
       local output = vim.fn.expand("%:p:h") .. "/output.txt"
