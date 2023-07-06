@@ -1,5 +1,6 @@
 
-vim.o.guicursor = "n-v-c:block-Cursor/lCursor"
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+-- vim.o.guicursor = "n-v-c:block-Cursor/lCursor"
 vim.o.completeopt = 'menuone,noselect'
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'

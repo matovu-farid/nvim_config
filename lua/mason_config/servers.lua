@@ -1,7 +1,7 @@
 
 local lspconfig = require('lspconfig')
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},

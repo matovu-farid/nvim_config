@@ -18,7 +18,9 @@ vim.api.nvim_create_augroup("PrintToOutput", {
   clear = false
 })
 
-
-
-
-
+vim.cmd [[
+  autocmd VimLeave * mksession! ~/.vim/session.vim
+  if argc() == 0 && filereadable("~/.vim/session.vim")
+    execute 'source ~/.vim/session.vim'
+  endif
+]]

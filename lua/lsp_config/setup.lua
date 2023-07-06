@@ -9,7 +9,7 @@ lspconfig.dartls.setup {
     -- Add key mapping for GoToDefinition
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
-    local opts = { noremap = true, silent = true }
+   local opts = { noremap = true, silent = true }
 
     -- Map 'gd' to GoToDefinition
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)

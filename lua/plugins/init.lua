@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.user_emmet_leader_key = '<C-z>'
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -104,13 +105,14 @@ require('lazy').setup({
       },
     },
   },
+
   {
-    -- Add a shades of purple theme
+  -- Add a shades of purple theme
     'Rigellute/shades-of-purple.vim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'shades_of_purple'
-    end,
+    -- config = function()
+    --   vim.cmd.colorscheme 'shades_of_purple'
+    -- end,
 
   },
 
@@ -118,9 +120,9 @@ require('lazy').setup({
     -- Theme inspired by Tokyonight
     'folke/tokyonight.nvim',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'tokyonight'
-    -- end,
+    config = function()
+      vim.cmd.colorscheme 'tokyonight'
+    end,
 
   },
   -- {'natebosch/vim-lsc'},
@@ -333,7 +335,7 @@ require('lazy').setup({
         options = {
           separator_style = "slant",
         },
-        
+
 
       }
     end
@@ -350,10 +352,18 @@ require('lazy').setup({
       { "nvim-treesitter/nvim-treesitter" }
     }
   },
-  {"ThePrimeagen/harpoon"}
+  { "ThePrimeagen/harpoon" },
+  { "mattn/emmet-vim" },
 
-
-
-
+  { "rafamadriz/friendly-snippets" },
+{
+  'rmagatti/auto-session',
+  config = function()
+    require("auto-session").setup( {
+      log_level = "error",
+      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    })
+  end
+}
 
 }, {})
