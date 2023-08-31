@@ -107,7 +107,7 @@ require('lazy').setup({
   },
 
   {
-  -- Add a shades of purple theme
+    -- Add a shades of purple theme
     'Rigellute/shades-of-purple.vim',
     priority = 1000,
     -- config = function()
@@ -143,7 +143,7 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline
+    -- Set lualine as statusline 
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -152,8 +152,11 @@ require('lazy').setup({
         theme = 'onedark',
         component_separators = '|',
         section_separators = '',
+        globalstatus = true,
+
       },
-    },
+          },
+
   },
 
   {
@@ -239,6 +242,7 @@ require('lazy').setup({
         tag = "v1.*",
         config = function()
           require 'window-picker'.setup({
+            popup_border_style = "rounded",
             autoselect_one = true,
             include_current = false,
             filter_rules = {
@@ -259,18 +263,24 @@ require('lazy').setup({
 
     config = function()
       require("neo-tree").setup({
+         source_selector = {
+            winbar = false,
+            statusline = true
+        },
         auto_open = 0,
 
         use_libuv_file_watcher = true,
         close_if_last_window = true,
-        window = {
-          width = 30,
-
-        },
+       
         buffers = {
           follow_current_file = true,
         },
+        window = {
+          position = "float",
+          width = 30,
+        },
         filesystem = {
+          use_libuv_file_watcher = true,
           follow_current_file = true,
           filtered_items = {
             hide_dotfiles = false,
@@ -282,8 +292,7 @@ require('lazy').setup({
               ".DS_Store",
               "thumbs.db"
             },
-            position = "right",
-
+           
           },
         },
 
@@ -356,14 +365,15 @@ require('lazy').setup({
   { "mattn/emmet-vim" },
 
   { "rafamadriz/friendly-snippets" },
-{
-  'rmagatti/auto-session',
-  config = function()
-    require("auto-session").setup( {
-      log_level = "error",
-      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
-    })
-  end
-}
+  {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup({
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      })
+    end
+  },
+  { "rcarriga/nvim-notify" },
 
 }, {})

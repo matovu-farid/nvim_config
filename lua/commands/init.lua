@@ -1,5 +1,5 @@
 require('commands.algorithm')
-require('commands.open')
+require('commands.open') 
 -- Change the appearance of the completion menu
 vim.cmd([[highlight Pmenu guifg=#ffffff guibg=#4b5263]])
 vim.cmd([[highlight PmenuSel guifg=#ffffff guibg=#61afef]])

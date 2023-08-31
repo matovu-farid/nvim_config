@@ -9,16 +9,12 @@ _G.expand_or_jump = function()
     return "<Tab>"
   end
 end
-
--- check if there's a choiceNode active
-_G.choice = function()
-  if luasnip.choice_active() then
-    return "<Plug>luasnip-next-choice"
-  else
-    return "<C-E>"
-  end
-end
-
+-- set keybinds for both INSERT and VISUAL.
+-- set keybinds for both INSERT and VISUAL.
+vim.api.nvim_set_keymap("i", "<leader>n", "<Plug>luasnip-next-choice", {})
+vim.api.nvim_set_keymap("s", "<leader>n", "<Plug>luasnip-next-choice", {})
+vim.api.nvim_set_keymap("i", "<leader>p", "<Plug>luasnip-prev-choice", {})
+vim.api.nvim_set_keymap("s", "<leader>p", "<Plug>luasnip-prev-choice", {})
 -- add the mappings
 local function luasnip_mappings()
   local imap = vim.api.nvim_set_keymap
@@ -30,8 +26,6 @@ local function luasnip_mappings()
   -- jumping backward in a snippet
   imap('i', '<S-Tab>', "<cmd>lua require'luasnip'.jump(-1)<Cr>", {silent = true})
 
-  -- changing choices in a choiceNode
-  imap('i', '<C-E>', "v:lua.choice()", opts)
 
   local smap = vim.api.nvim_set_keymap
 
@@ -45,5 +39,5 @@ local function luasnip_mappings()
   smap('s', '<C-E>', "v:lua.choice()", opts)
 end
 
-require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({paths = {"/Users/faridmatovu/.config/nvim/lua/snips/snippets.lua"}})
 luasnip_mappings()

@@ -41,7 +41,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>t', "<cmd>Lspsaga term_toggle<CR>", 'Toggle terminal')
 
   -- add shortcut to toggle neo tree
-  nmap('<leader>b', ":Neotree toggle filesystem right<CR>", 'Toggle NeoTree')
+  -- nmap('<leader>b', ":Neotree float toggle", 'Toggle NeoTree')
   nmap("[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "diagnostic jump prev")
   nmap("]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", "diagnostic jump next")
 
@@ -52,7 +52,7 @@ local on_attach = function(_, bufnr)
   keymap("n", "]E", function()
     require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
   end)
-  nmap('<leader>rn', "<cmd>Lspsaga rename<CR>", '[R]e[n]ame')
+  -- nmap('<leader>rn', "<cmd>Lspsaga rename<CR>", '[R]e[n]ame')
   nmap('<leader>ca', "<cmd>Lspsaga code_action<CR>", '[C]ode [A]ction')
 
   nmap('gd', "<cmd>Lspsaga goto_definition<CR>", '[G]oto [D]efinition')

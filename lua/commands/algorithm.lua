@@ -24,28 +24,31 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
   group = group
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "main.py" },
+
+
+vim.api.nvim_create_autocmd({ 'BufAdd' }, {
+  pattern = { "main.cpp" },
   callback = function()
-    local buffer_number = vim.fn.bufnr("output.txt")
-    local filename = vim.fn.expand("%:p")
     local projectName = vim.fn.expand("%:p:h:t")
     if projectName ~= "algorithms" then
       return
     end
+    vim.api.nvim_command("Copilot disable")
 
-    vim.fn.jobstart({ "python3", filename }, {
-      on_stdout = function(_, data, _)
-        vim.api.nvim_buf_set_lines(buffer_number, 0, -1, false, { "Algorithms are lit" })
-        vim.api.nvim_buf_set_lines(buffer_number, -1, -1, false, data)
-      end,
-      on_stderr = function(_, data, _)
-        vim.api.nvim_buf_set_lines(buffer_number, -1, -1, false, { "" })
-        vim.api.nvim_buf_set_lines(buffer_number, -1, -1, false, data)
-      end,
-      stdout_buffered = true,
-      stderr_buffered = true,
-    })
+    vim.keymap.set("n", "<leader>r", ":silent !crun main.cpp<CR>", {silent = true})
+    vim.schedule(function()
+      local output = vim.fn.expand("%:p:h") .. "/output.txt"
+      local input = vim.fn.expand("%:p:h") .. "/input.txt"
+      vim.api.nvim_command("rightbelow vsplit " .. input)
+      vim.api.nvim_command("rightbelow split " .. output)
+      vim.api.nvim_command("wincmd h")
+
+      vim.api.nvim_command("vertical resize 85")
+
+    end)
   end,
   group = group
 })
+
+
+
