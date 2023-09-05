@@ -44,6 +44,7 @@ ls.add_snippets("cpp", {
 			"",
 			"#include <iostream>",
 			"#include <vector>",
+			"using ll = long long;",
 			"",
 			"using namespace std;",
 			"",

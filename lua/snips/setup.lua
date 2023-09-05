@@ -11,10 +11,10 @@ _G.expand_or_jump = function()
 end
 -- set keybinds for both INSERT and VISUAL.
 -- set keybinds for both INSERT and VISUAL.
-vim.api.nvim_set_keymap("i", "<leader>n", "<Plug>luasnip-next-choice", {})
-vim.api.nvim_set_keymap("s", "<leader>n", "<Plug>luasnip-next-choice", {})
-vim.api.nvim_set_keymap("i", "<leader>p", "<Plug>luasnip-prev-choice", {})
-vim.api.nvim_set_keymap("s", "<leader>p", "<Plug>luasnip-prev-choice", {})
+vim.api.nvim_set_keymap("i", "<leader>cn", "<Plug>luasnip-next-choice", {})
+vim.api.nvim_set_keymap("s", "<leader>cn", "<Plug>luasnip-next-choice", {})
+vim.api.nvim_set_keymap("i", "<leader>cp", "<Plug>luasnip-prev-choice", {})
+vim.api.nvim_set_keymap("s", "<leader>cp", "<Plug>luasnip-prev-choice", {})
 -- add the mappings
 local function luasnip_mappings()
   local imap = vim.api.nvim_set_keymap

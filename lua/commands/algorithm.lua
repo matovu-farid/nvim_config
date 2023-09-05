@@ -1,3 +1,6 @@
+
+-- Set the key mapping
+
 local group = vim.api.nvim_create_augroup("PrintToOutput", {
   clear = true })
 vim.api.nvim_create_autocmd({ 'BufAdd' }, {
@@ -35,7 +38,8 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
     end
     vim.api.nvim_command("Copilot disable")
 
-    vim.keymap.set("n", "<leader>r", ":silent !crun main.cpp<CR>", {silent = true})
+    vim.cmd[[autocmd User JobActivity if mode() != 'c' | checktime | endif]]
+    vim.keymap.set("n", "<leader>r", ":silent !crun main.cpp<CR>", {silent = true,})
     vim.schedule(function()
       local output = vim.fn.expand("%:p:h") .. "/output.txt"
       local input = vim.fn.expand("%:p:h") .. "/input.txt"
@@ -44,11 +48,13 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
       vim.api.nvim_command("wincmd h")
 
       vim.api.nvim_command("vertical resize 85")
-
     end)
   end,
   group = group
 })
 
+
+-- In a separate Lua file or within your init.lua
+-- Create a module 'myjobstart' with a function 'run_command'
 
 
