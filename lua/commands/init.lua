@@ -24,3 +24,15 @@ vim.cmd [[
     execute 'source ~/.vim/session.vim'
   endif
 ]]
+
+vim.api.nvim_create_augroup("Greeting", { clear = true })
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.schedule(function()
+      print("Welcome back Farid 😊🌴")
+    end)
+  end,
+  group = "Greeting",
+  pattern = "*",
+})
+

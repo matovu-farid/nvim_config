@@ -11,11 +11,3 @@ function new_file()
 end
 
 vim.api.nvim_set_keymap("n", "%", ":lua new_file()<CR>", { noremap = true })
-
-function delete_and_refresh()
-  local filename = vim.fn.expand("%")
-  vim.cmd("silent! delete " .. filename)
-  vim.cmd("NvimTreeRefresh")
-end
-
-vim.api.nvim_set_keymap("n", "<leader>df", ":delete_and_refresh()<CR>", { noremap = true })
