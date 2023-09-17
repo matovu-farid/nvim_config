@@ -47,5 +47,6 @@ prettier.setup({
     "typescript",
     "typescriptreact",
     "yaml",
+    "ruby",
   },
 })

@@ -24,3 +24,4 @@ vim.cmd [[
     execute 'source ~/.vim/session.vim'
   endif
 ]]
+

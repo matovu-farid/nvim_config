@@ -13,32 +13,12 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
   -- remap Escape in to jk
-  vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
-
-  local keymap = vim.keymap.set
-
-
-  -- Install CtrlSF plugin with the 'lazy' package manager
-
-  -- CtrlSF key mappings
-
-
-  vim.keymap.set('n', '<Leader>sf', '<Plug>CtrlSFPrompt', {})
-  vim.keymap.set('v', '<Leader>sf', '<Plug>CtrlSFVwordPath', {})
-  vim.keymap.set('v', '<Leader>F', '<Plug>CtrlSFVwordExec', {})
-  vim.keymap.set('n', '<Leader>sn', '<Plug>CtrlSFCwordPath', {})
-  vim.keymap.set('n', '<Leader>sp', '<Plug>CtrlSFPwordPath', {})
-  vim.keymap.set('n', '<Leader>so', ':CtrlSFOpen<CR>', { noremap = true, silent = true })
-  vim.keymap.set('n', '<Leader>st', ':CtrlSFToggle<CR>', { noremap = true, silent = true })
-  -- vim.keymap.set('i', '<Leader>ft', '<Esc>:CtrlSFToggle<CR>', { noremap = true, silent = true })
-
-
+ 
 
 
 
   -- CtrlSF configuration
-  -- create a shortcut to :ToggleTerm
-  nmap('<leader>t', "<cmd>Lspsaga term_toggle<CR>", 'Toggle terminal')
+
 
   -- add shortcut to toggle neo tree
   -- nmap('<leader>b', ":Neotree float toggle", 'Toggle NeoTree')
