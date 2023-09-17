@@ -1,11 +1,15 @@
 
-local lspconfig = require('lspconfig')
 local servers = {
   clangd = {},
+  ruby_ls ={},
+  -- rubocop = {cmd={ "rubocop", "--lsp" }, filetypes={"ruby", "eruby"}},
+  solargraph={},
+  vimls = {},
+  -- sqls = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   bashls = {},
 
   lua_ls = {

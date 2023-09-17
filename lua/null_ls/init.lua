@@ -11,5 +11,9 @@ null_ls.setup({
         null_ls.builtins.formatting.prettier_eslint,
         null_ls.builtins.formatting.prettierd,
         null_ls.builtins.formatting.prismaFmt,
+        null_ls.builtins.diagnostics.erb_lint,
+        null_ls.builtins.diagnostics.rubocop,
+        null_ls.builtins.diagnostics.standardrb,
+        null_ls.builtins.formatting.erb_format
     },
 })
