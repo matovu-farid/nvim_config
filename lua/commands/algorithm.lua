@@ -38,12 +38,13 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
     end
     vim.api.nvim_command("Copilot disable")
 
-    vim.cmd[[autocmd User JobActivity if mode() != 'c' | checktime | endif]]
+    -- vim.cmd[[autocmd User JobActivity if mode() != 'c' | checktime | endif]]
     vim.keymap.set("n", "<leader>r", ":silent !crun main.cpp<CR>", {silent = true,})
     vim.schedule(function()
       local output = vim.fn.expand("%:p:h") .. "/output.txt"
       local input = vim.fn.expand("%:p:h") .. "/input.txt"
       vim.api.nvim_command("rightbelow vsplit " .. input)
+      io.open(output, "w"):close()
       vim.api.nvim_command("rightbelow split " .. output)
       vim.api.nvim_command("wincmd h")
 

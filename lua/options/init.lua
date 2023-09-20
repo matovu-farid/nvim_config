@@ -40,3 +40,4 @@ vim.o.breakindent = true
 vim.o.undofile = true
 
 vim.wo.foldmethod = "syntax"
+vim.o.splitright = true
