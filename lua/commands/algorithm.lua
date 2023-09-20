@@ -1,6 +1,4 @@
-
 -- Set the key mapping
-
 local group = vim.api.nvim_create_augroup("PrintToOutput", {
   clear = true })
 vim.api.nvim_create_autocmd({ 'BufAdd' }, {
@@ -27,7 +25,45 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
   group = group
 })
 
+local output_lines = {}
+local job_id = nil
+local function on_stdout(_, data, _)
+  for _, line in ipairs(data) do
+    table.insert(output_lines, line)
+    if #output_lines >= 100 then
+      vim.fn.jobstop(job_id)
+      break
+    end
+  end
+end
 
+local function on_exit(_, _)
+  local output_file = vim.fn.expand("%:p:h") .. "/output.txt"
+  local file = io.open(output_file, "w")
+  if file then
+    file:write(table.concat(output_lines, "\n"))
+    file:flush()
+    file:close()
+
+    -- Update the buffer if it's open
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_get_name(buf) == output_file then
+        vim.api.nvim_buf_set_lines(buf, 0, -1, false, output_lines)
+        vim.api.nvim_buf_set_option(buf, 'modified', false)
+      end
+    end
+  end
+end
+
+
+function run_main()
+  -- Start the job
+  job_id = vim.fn.jobstart({ "/usr/local/bin/crun", "main.cpp" }, {
+    on_stdout = on_stdout,
+    on_exit = on_exit,
+  })
+  output_lines = {}
+end
 
 vim.api.nvim_create_autocmd({ 'BufAdd' }, {
   pattern = { "main.cpp" },
@@ -39,7 +75,7 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
     vim.api.nvim_command("Copilot disable")
 
     -- vim.cmd[[autocmd User JobActivity if mode() != 'c' | checktime | endif]]
-    vim.keymap.set("n", "<leader>r", ":silent !crun main.cpp<CR>", {silent = true,})
+    vim.keymap.set("n", "<leader>r", run_main, { silent = true })
     vim.schedule(function()
       local output = vim.fn.expand("%:p:h") .. "/output.txt"
       local input = vim.fn.expand("%:p:h") .. "/input.txt"
@@ -57,5 +93,3 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
 
 -- In a separate Lua file or within your init.lua
 -- Create a module 'myjobstart' with a function 'run_command'
-
-
