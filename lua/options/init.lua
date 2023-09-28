@@ -41,3 +41,14 @@ vim.o.undofile = true
 
 vim.wo.foldmethod = "syntax"
 vim.o.splitright = true
+
+vim.o.scrolloff = 5
+vim.o.autoread = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.showmatch = true
+vim.o.smartindent = true
+vim.wo.linebreak = true
+vim.wo.cursorline = true
+

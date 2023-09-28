@@ -109,27 +109,107 @@ require('lazy').setup({
   {
     -- Add a shades of purple theme
     'Rigellute/shades-of-purple.vim',
-    priority = 1000,
     -- config = function()
     --   vim.cmd.colorscheme 'shades_of_purple'
     -- end,
+
+  },
+  {
+    'maxmx03/solarized.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.o.background = 'dark' -- or 'light'
+
+
+      require('solarized').setup({
+        theme = 'neo', -- or comment to use solarized default theme.
+        enables = {
+          editor = true,
+          syntax = true,
+          bufferline = true,
+          cmp = true,
+          diagnostic = true,
+          dashboard = true,
+          gitsign = true,
+          hop = true,
+          indentblankline = true,
+          lsp = true,
+          lspsaga = true,
+          navic = true,
+          neotree = true,
+          notify = true,
+          semantic = true,
+          telescope = true,
+          tree = true,
+          treesitter = true,
+          whichkey = true,
+          mini = true, -- PLUGINS
+        },
+        styles = {
+          comments = { italic = true, bold = false },
+          functions = { italic = true },
+          variables = { italic = false, },
+        },
+        colors = function(colors, colorhelper)
+          local darken = colorhelper.darken
+          local lighten = colorhelper.lighten
+          local blend = colorhelper.blend
+
+          return {
+            fg = "#ffffff", -- output: #ffffff
+            bg = darken(colors.base03, 10),
+            blend = blend(colors.base03, colors.base00, 0.5),
+          }
+        end,
+        highlights = function(colors)
+          local c = colors
+          return {
+            Normal = { fg = colors.fg, bg = colors.bg },
+            LineNr = { bg = colors.bg },
+            CursorLineNr = { bg = colors.bg },
+            SignColumn = { bg = colors.bg },
+            VertSplit = { bg = "NONE", fg = "NONE" },
+            Visual = { bg = c.base04 },
+            CmpKindBorder = { fg = c.base01, bg = c.base04 }
+          }
+        end
+      })
+    end,
 
   },
 
   {
     -- Theme inspired by Tokyonight
     'folke/tokyonight.nvim',
+    lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'tokyonight'
+      -- vim.cmd.colorscheme 'tokyonight'
     end,
 
   },
+  {'AhmedAbdulrahman/vim-aylin'},
+  {'Mofiqul/dracula.nvim'},
+  {'shaunsingh/nord.nvim'},
+  {'Th3Whit3Wolf/one-nvim'},
+  {'mhartington/oceanic-next'},
+  {
+  'projekt0n/github-nvim-theme',
+  lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  priority = 1000, -- make sure to load this before all the other start plugins
+  config = function()
+    require('github-theme').setup({
+      -- ...
+    })
+
+    vim.cmd('colorscheme github_dark')
+  end,
+},
   -- {'natebosch/vim-lsc'},
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
     config = function()
       require("persistence").setup()
     end,
@@ -143,7 +223,7 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline 
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -155,7 +235,7 @@ require('lazy').setup({
         globalstatus = true,
 
       },
-          },
+    },
 
   },
 
@@ -236,42 +316,42 @@ require('lazy').setup({
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
-      {
-        -- only needed if you want to use the commands with "_with_window_picker" suffix
-        's1n7ax/nvim-window-picker',
-        tag = "v1.*",
-        config = function()
-          require 'window-picker'.setup({
-            popup_border_style = "rounded",
-            autoselect_one = true,
-            include_current = false,
-            filter_rules = {
-              -- filter using buffer options
-              bo = {
-                -- if the file type is one of following, the window will be ignored
-                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
 
-                -- if the buffer type is one of following, the window will be ignored
-                buftype = { 'terminal', "quickfix" },
-              },
+      -- only needed if you want to use the commands with "_with_window_picker" suffix
+      's1n7ax/nvim-window-picker',
+      tag = "v1.*",
+      config = function()
+        require 'window-picker'.setup({
+          popup_border_style = "rounded",
+          autoselect_one = true,
+          include_current = false,
+          filter_rules = {
+            -- filter using buffer options
+            bo = {
+              -- if the file type is one of following, the window will be ignored
+              filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+
+              -- if the buffer type is one of following, the window will be ignored
+              buftype = { 'terminal', "quickfix" },
             },
-            other_win_hl_color = '#e35e4f',
-          })
-        end,
-      }
+          },
+          other_win_hl_color = '#e35e4f',
+        })
+      end,
+
     },
 
     config = function()
       require("neo-tree").setup({
-         source_selector = {
-            winbar = false,
-            statusline = true
+        source_selector = {
+          winbar = false,
+          statusline = true
         },
         auto_open = 0,
 
         use_libuv_file_watcher = true,
         close_if_last_window = true,
-       
+
         buffers = {
           follow_current_file = true,
         },
@@ -292,7 +372,7 @@ require('lazy').setup({
               ".DS_Store",
               "thumbs.db"
             },
-           
+
           },
         },
 

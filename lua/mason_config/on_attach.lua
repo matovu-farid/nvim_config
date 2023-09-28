@@ -5,15 +5,8 @@ local on_attach = function(_, bufnr)
   --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-  -- remap Escape in to jk
- 
+
 
 
 
@@ -21,39 +14,39 @@ local on_attach = function(_, bufnr)
 
 
   -- add shortcut to toggle neo tree
-  -- nmap('<leader>b', ":Neotree float toggle", 'Toggle NeoTree')
-  nmap("[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "diagnostic jump prev")
-  nmap("]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", "diagnostic jump next")
+  -- vim.keymap.set('n','<leader>b', ":Neotree float toggle", 'Toggle NeoTree')
+  vim.keymap.set('n',"[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {silent = true, desc = 'diagnostic jump prev'})
+  vim.keymap.set('n',"]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {silent = true, desc = 'diagnostic jump next'})
 
   -- Diagnostic jump with filters such as only jumping to an error
-  keymap("n", "[E", function()
+  vim.keymap.set("n", "[E", function()
     require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  end)
-  keymap("n", "]E", function()
+  end, { silent = true, desc = 'diagnostic jump prev' })
+  vim.keymap.set("n", "]E", function()
     require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-  end)
-  -- nmap('<leader>rn', "<cmd>Lspsaga rename<CR>", '[R]e[n]ame')
-  nmap('<leader>ca', "<cmd>Lspsaga code_action<CR>", '[C]ode [A]ction')
+  end, { silent = true, desc = 'diagnostic jump next' })
+  vim.keymap.set('n','<leader>rn', "<cmd>Lspsaga rename<CR>", { silent = true, desc = 'Rename' })
 
-  nmap('gd', "<cmd>Lspsaga goto_definition<CR>", '[G]oto [D]efinition')
-  nmap('gT', "<cmd>Lspsaga peek_type_definition<CR>", '[G]oto [T]ype')
-  nmap('gr', "<cmd>Lspsaga rename ++project<CR>", '[G]oto [R]eferences')
-  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-  nmap("gp", "<cmd>Lspsaga peek_definition<CR>", "Peek definition")
+  vim.keymap.set('n', '<leader>ca', "<cmd>Lspsaga code_action<CR>", { silent = true, desc = '[C]ode [A]ction' })
+  vim.keymap.set('n','gd', "<cmd>Lspsaga goto_definition<CR>", { silent = true, desc = '[G]oto [D]efinition' })
+  vim.keymap.set('n','gT', "<cmd>Lspsaga peek_type_definition<CR>" , { silent = true, desc = '[G]oto [T]ype' })
+  vim.keymap.set('n','gr', "<cmd>Lspsaga rename ++project<CR>",  { silent = true, desc = '[G]oto [R]eferences' })
+  vim.keymap.set('n','gI', vim.lsp.buf.implementation, { silent = true, desc = '[G]oto [I]mplementation' })
+  vim.keymap.set('n','<leader>D', vim.lsp.buf.type_definition, { silent = true, desc = '[D]efinition' })
+  vim.keymap.set('n','<leader>ds', require('telescope.builtin').lsp_document_symbols, { silent = true, desc = '[D]ocument [S]ymbols' })
+  vim.keymap.set('n','<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { silent = true, desc = '[W]orkspace [S]ymbols' })
+  vim.keymap.set('n',"gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true, desc = '[G]oto [P]eek' })
   -- See `:help K` for why this keymap
-  nmap('K', "<cmd>Lspsaga hover_doc<CR>", 'Hover Documentation')
-  nmap('<Tab>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  vim.keymap.set('n','K', "<cmd>Lspsaga hover_doc<CR>", { silent = true, desc = '[K] [D]ocumentation' })
+  vim.keymap.set('n','<Tab>', vim.lsp.buf.signature_help, { silent = true, desc = '[S]ignature [H]elp' })
 
   -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
+  vim.keymap.set('n','gD', vim.lsp.buf.declaration, { silent = true, desc = '[G]oto [D]eclaration' })
+  vim.keymap.set('n','<leader>wa', vim.lsp.buf.add_workspace_folder, { silent = true, desc = '[W]orkspace [A]dd Folder'})
+  vim.keymap.set('n','<leader>wr', vim.lsp.buf.remove_workspace_folder, { silent = true, desc = '[W]orkspace [R]emove Folder'})
+  vim.keymap.set('n','<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  end, { silent = true, desc = '[W]orkspace [L]ist Folders'})
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)

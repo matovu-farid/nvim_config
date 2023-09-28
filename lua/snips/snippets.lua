@@ -57,7 +57,6 @@ ls.add_snippets("cpp", {
 			"int main() {",
 			"#ifndef ONLINE_JUDGE",
 			'  freopen("input.txt", "r", stdin);',
-			'  freopen("output.txt", "w", stdout);',
 			"#endif",
 			"  ios::sync_with_stdio(0);",
 			"  cin.tie(0);",
@@ -73,7 +72,36 @@ ls.add_snippets("cpp", {
 		})
 	}),
 
-
+	s("cp2", {
+		t({
+			"#ifndef ONLINE_JUDGE",
+			'#include "store/print.h"',
+			"#endif",
+			"",
+			"#include <iostream>",
+			"#include <vector>",
+			"using ll = long long;",
+			"",
+			"using namespace std;",
+			"",
+			"void solve() {"
+		}),
+		i(1, "code"),
+		t({
+			"}",
+			"",
+			"int main() {",
+			"#ifndef ONLINE_JUDGE",
+			'  freopen("input.txt", "r", stdin);',
+			"#endif",
+			"  ios::sync_with_stdio(0);",
+			"  cin.tie(0);",
+			"  solve();",
+			"",
+			"  return 0;",
+			"}"
+		})
+	}),
 
 	s("fenwick_temp", {
 		t({

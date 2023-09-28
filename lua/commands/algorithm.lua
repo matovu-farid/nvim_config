@@ -29,7 +29,8 @@ local output_lines = {}
 local job_id = nil
 local function on_stdout(_, data, _)
   for _, line in ipairs(data) do
-    table.insert(output_lines, line)
+    local truncated_line = string.sub(line, 1, 80)
+    table.insert(output_lines, truncated_line)
     if #output_lines >= 100 then
       vim.fn.jobstop(job_id)
       break

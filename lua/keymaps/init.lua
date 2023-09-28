@@ -21,7 +21,7 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("x", "<leader>p", [["_dP]])
 nmap( "<C-k>", ":cnext<CR>")
 nmap( "<C-j>", ":cprevious<CR>")
-vim.keymap.set('n', '<Leader>c', 'win_gettype() ==# "quickfix" ? ":cclose<CR>" : ":copen<CR>"',
+vim.keymap.set('n', '<C-c>', 'win_gettype() ==# "quickfix" ? ":cclose<CR>" : ":copen<CR>"',
   { expr = true, silent = true })
 
 -- Telescope keymaps
