@@ -38,8 +38,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',    opts = {} },
+
       { 'nvim-lua/plenary.nvim' },
       {
         'akinsho/flutter-tools.nvim',
@@ -48,7 +47,7 @@ require('lazy').setup({
           'nvim-lua/plenary.nvim',
           'stevearc/dressing.nvim', -- optional for vim.ui.select
         },
-      }, { "lukas-reineke/indent-blankline.nvim" },
+      }, { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
       {
         "akinsho/toggleterm.nvim",
         config = function()
@@ -63,6 +62,11 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
+  },
+  { 'honza/vim-snippets' },
 
   {
     -- Autocompletion
@@ -186,26 +190,35 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       -- vim.cmd.colorscheme 'tokyonight'
+      --
+      require('tokyonight').setup({
+          transparent = true,
+          styles = {
+            sidebars = "transparent",
+            floats = "transparent",
+          }
+        
+      })
     end,
 
   },
-  {'AhmedAbdulrahman/vim-aylin'},
-  {'Mofiqul/dracula.nvim'},
-  {'shaunsingh/nord.nvim'},
-  {'Th3Whit3Wolf/one-nvim'},
-  {'mhartington/oceanic-next'},
+  { 'AhmedAbdulrahman/vim-aylin' },
+  { 'Mofiqul/dracula.nvim' },
+  { 'shaunsingh/nord.nvim' },
+  { 'Th3Whit3Wolf/one-nvim' },
+  { 'mhartington/oceanic-next' },
   {
-  'projekt0n/github-nvim-theme',
-  lazy = false, -- make sure we load this during startup if it is your main colorscheme
-  priority = 1000, -- make sure to load this before all the other start plugins
-  config = function()
-    require('github-theme').setup({
-      -- ...
-    })
+    'projekt0n/github-nvim-theme',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('github-theme').setup({
+        -- ...
+      })
 
-    vim.cmd('colorscheme github_dark')
-  end,
-},
+      vim.cmd('colorscheme github_dark')
+    end,
+  },
   -- {'natebosch/vim-lsc'},
   {
     "folke/persistence.nvim",
@@ -430,15 +443,14 @@ require('lazy').setup({
     end
   },
   {
-    "glepnir/lspsaga.nvim",
-    event = "LspAttach",
+    'nvimdev/lspsaga.nvim',
+    event = 'LspAttach',
     config = function()
-      require("lspsaga").setup({})
+      require('lspsaga').setup({})
     end,
     dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-      --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" }
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'
     }
   },
   { "ThePrimeagen/harpoon" },
@@ -455,5 +467,29 @@ require('lazy').setup({
     end
   },
   { "rcarriga/nvim-notify" },
+  {
+    "xiyaowong/transparent.nvim",
+    config = function()
+      require("transparent").setup({
+        -- Optional, you don't have to run setup.
+        groups = { -- table: default groups
+          'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+          'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+          'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline', 'Pmenu', 'PmenuSel',
+          'TabLineFill', 'TabLineSel', 'TabLine', 'TabLineFill', 'TabLineSel',
+
+
+        },
+        extra_groups = {
+          "NormalFloat",     -- plugins which have float panel such as Lazy, Mason, LspInfo
+          "NvimTreeNormal",  -- NvimTree
+        },                   -- table: additional groups that should be cleared
+        exclude_groups = {}, -- table: groups you don't want to clear
+      })
+      require('transparent').clear_prefix('BufferLine')
+      require('transparent').clear_prefix('NeoTree')
+    end
+  }
 
 }, {})

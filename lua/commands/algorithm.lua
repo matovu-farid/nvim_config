@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd({ 'BufAdd' }, {
     vim.api.nvim_command("Copilot disable")
 
     -- vim.cmd[[autocmd User JobActivity if mode() != 'c' | checktime | endif]]
-    vim.keymap.set("n", "<leader>r", run_main, { silent = true })
+    vim.keymap.set("n", "<leader>x", run_main, { silent = true, desc = "Run main.cpp" })
     vim.schedule(function()
       local output = vim.fn.expand("%:p:h") .. "/output.txt"
       local input = vim.fn.expand("%:p:h") .. "/input.txt"

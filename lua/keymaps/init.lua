@@ -9,7 +9,6 @@ end
 -- A shortcut for the :Format command
 vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, { silent = true })
 vim.keymap.set('n', '<Leader>b', ':Neotree float toggle<CR>', { silent = true })
-vim.keymap.set('n', '<Leader>x', ':so ~/.config/nvim/init.lua', {})
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`

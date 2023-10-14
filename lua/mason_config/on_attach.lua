@@ -41,7 +41,6 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n','<Tab>', vim.lsp.buf.signature_help, { silent = true, desc = '[S]ignature [H]elp' })
 
   -- Lesser used LSP functionality
-  vim.keymap.set('n','gD', vim.lsp.buf.declaration, { silent = true, desc = '[G]oto [D]eclaration' })
   vim.keymap.set('n','<leader>wa', vim.lsp.buf.add_workspace_folder, { silent = true, desc = '[W]orkspace [A]dd Folder'})
   vim.keymap.set('n','<leader>wr', vim.lsp.buf.remove_workspace_folder, { silent = true, desc = '[W]orkspace [R]emove Folder'})
   vim.keymap.set('n','<leader>wl', function()

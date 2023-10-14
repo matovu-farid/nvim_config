@@ -10,6 +10,9 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.foldmethod = 'expr'
+
+
+vim.opt.termguicolors = true
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
@@ -50,5 +53,4 @@ vim.o.expandtab = true
 vim.o.showmatch = true
 vim.o.smartindent = true
 vim.wo.linebreak = true
-vim.wo.cursorline = true
 
