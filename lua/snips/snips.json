@@ -1,0 +1,21 @@
+{
+    "For Loop": {
+        "prefix": [
+            "for-const"
+        ],
+        "body": [
+            "for (const ${2:element} of ${1:array}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "A for loop."
+    },
+    "Print to console": {
+        "prefix": "log",
+        "body": [
+            "console.log('$1');",
+            "$0"
+        ],
+        "description": "Log output to console"
+    }
+}

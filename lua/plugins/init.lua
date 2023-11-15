@@ -73,7 +73,8 @@ require('lazy').setup({
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
-
+  {'hrsh7th/cmp-path'},
+  {"onsails/lspkind.nvim"},
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -476,7 +477,7 @@ require('lazy').setup({
           'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
           'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
           'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline', 'Pmenu', 'PmenuSel',
+          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline', 'Pmenu', 
           'TabLineFill', 'TabLineSel', 'TabLine', 'TabLineFill', 'TabLineSel',
 
 

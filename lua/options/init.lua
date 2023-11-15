@@ -9,8 +9,7 @@ vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
-vim.o.foldmethod = 'expr'
-
+vim.opt.swapfile = false
 
 vim.opt.termguicolors = true
 -- Set completeopt to have a better completion experience
@@ -42,7 +41,9 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
-vim.wo.foldmethod = "syntax"
+vim.wo.foldmethod = "indent"
+vim.wo.foldenable = false
+
 vim.o.splitright = true
 
 vim.o.scrolloff = 5

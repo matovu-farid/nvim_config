@@ -1,12 +1,6 @@
 local luasnip = require 'luasnip'
 -- check if there's a text to be expanded or if the cursor is at a snippet's tabstop
-_G.expand_or_jump = function()
-  if luasnip.expand_or_jumpable() then
-    return "<Plug>luasnip-expand-or-jump"
-  else
-    return "<Tab>"
-  end
-end
+
 -- set keybinds for both INSERT and VISUAL.
 -- set keybinds for both INSERT and VISUAL.
 -- add the mappings
@@ -15,28 +9,37 @@ local function luasnip_mappings()
   local opts = { silent = true, expr = true }
 
   -- expanding or jumping forward in a snippet
-  imap('i', '<Tab>', "v:lua.expand_or_jump()", opts)
 
+  
+  
   -- jumping backward in a snippet
   imap('i', '<S-Tab>', "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true })
+  vim.keymap.set({'i','n'}, '<C-k>', function()
+    if luasnip.expand_or_jumpable() then
+      return "<Plug>luasnip-expand-or-jump"
+    end
+  end, { silent = true, expr = true, desc = "Expand snippet" })
+  vim.keymap.set({'i','n'}, '<C-j>', function()
+    if luasnip.jumpable(-1) then
+      return luasnip.jump(-1)
+    end
+  end, { silent = true, expr = true, desc = "Jump back" })
+  vim.keymap.set({'i','n'}, '<C-l>', function()
+    if luasnip.choice_active() then
+      print("choice active")
+      return "<cmd>lua require'luasnip'.change_choice(1)<Cr>"
+    end
+  end, { silent = true, expr = true, desc = "Jump forward" })
 
-
-  local smap = vim.api.nvim_set_keymap
-
-  -- jumping forward in a snippet
-  smap('s', '<Tab>', "<cmd>lua require'luasnip'.jump(2)<Cr>", { silent = true })
-
-  -- jumping backward in a snippet
-  smap('s', '<S-Tab>', "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true })
-
-  -- changing choices in a choiceNode
-  smap('s', '<C-E>', "v:lua.choice()", opts)
 end
 
+luasnip.filetype_extend("javascript", { "javascript" })
 require("luasnip.loaders.from_vscode").lazy_load({
-  paths = { "/Users/faridmatovu/.config/nvim/lua/snips/snippets.lua" } })
+  paths = { "/Users/faridmatovu/.config/nvim/lua/snips/snippets.lua",
+    "/Users/faridmatovu/.config/nvim/lua/snips/snips.json" }
+})
+
 require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_snipmate").lazy_load()
 luasnip_mappings()
 
 -- will exclude all javascript snippets
@@ -46,4 +49,3 @@ luasnip_mappings()
 -- for _, path in ipairs(paths) do
 --   luasnip.snippets = vim.tbl_extend('force', luasnip.snippets, luasnip.loaders.load_file(path))
 -- end
-

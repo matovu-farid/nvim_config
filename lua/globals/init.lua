@@ -13,3 +13,4 @@ vim.g.lsc_auto_map = { defaults = true, GoToDefinition = 'gd' }
 -- vim.g.fugitive_diff_split_cmd = 'vertical diffsplit'
 vim.g.nvim_tree_side = 'right'
 
+

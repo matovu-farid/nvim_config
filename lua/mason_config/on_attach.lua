@@ -38,7 +38,6 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n',"gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true, desc = '[G]oto [P]eek' })
   -- See `:help K` for why this keymap
   vim.keymap.set('n','K', "<cmd>Lspsaga hover_doc<CR>", { silent = true, desc = '[K] [D]ocumentation' })
-  vim.keymap.set('n','<Tab>', vim.lsp.buf.signature_help, { silent = true, desc = '[S]ignature [H]elp' })
 
   -- Lesser used LSP functionality
   vim.keymap.set('n','<leader>wa', vim.lsp.buf.add_workspace_folder, { silent = true, desc = '[W]orkspace [A]dd Folder'})

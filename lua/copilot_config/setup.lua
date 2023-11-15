@@ -6,7 +6,7 @@ require('copilot').setup({
     keymap = {
       jump_prev = "[[",
       jump_next = "]]",
-      accept = "<CR>",
+      accept = "<C-y>",
       refresh = "gr",
       open = "<M-CR>"
     },
