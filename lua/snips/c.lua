@@ -48,7 +48,7 @@ void solve() {{
 }}
 int main() {{
 #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
+  freopen(".input", "r", stdin);
 #endif
   ios::sync_with_stdio(0);
   cin.tie(0);
@@ -107,17 +107,18 @@ int main() {{
 	}),
 	s("graph", fmt([[
 class Graph {{
-  {} V;
-  list<{}> *l;
+  int V;
+  vector<vector<int>> l;
 
 public:
-  Graph({} v) {{
+  Graph(int v) {{
     V = v;
-    l = new list<{}>[V];
+    l.resize(v);
   }}
-  void addEdge({} i, {} j, bool undir=true) {{
+  void addEdge(int i, int j, bool undir = true) {{
+
     l[i].push_back(j);
-    if(undir) {{
+    if (undir) {{
       l[j].push_back(i);
     }}
   }}
@@ -132,7 +133,8 @@ public:
   }}
 }};
 
-	]], { i(1, "int"), rep(1), rep(1), rep(1), rep(1), rep(1) })),
+
+	]], {  })),
 	s("point", t({
 		'struct Point {',
 		'  int x;',

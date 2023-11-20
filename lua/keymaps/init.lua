@@ -18,24 +18,13 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
-local function cnext_wrap()
-  local qflist = vim.fn.getqflist()
-  local qfindex = vim.fn.getqflist({ idx = 0 }).idx
-  if #qflist > 0 and qfindex < #qflist then
-    vim.cmd('cnext')
-  end
-end
 
-local function cprev_wrap()
-  local qflist = vim.fn.getqflist()
-  local qfindex = vim.fn.getqflist({ idx = 0 }).idx
-  if #qflist > 0 and qfindex > 1 then
-    vim.cmd('cprevious')
-  end
-end
 
-vim.keymap.set('n', '<C-k>', cnext_wrap, { silent = true, desc = "Jump forward" })
-vim.keymap.set('n', '<C-j>', cprev_wrap, { silent = true, desc = "Jump back" })
+
+
+
+vim.keymap.set('n', '<C-j>', ':cnext<CR>', { silent = true, desc = "Jump forward" })
+vim.keymap.set('n', '<C-k>', ':cprevious<CR>', { silent = true, desc = "Jump back" })
 vim.keymap.set('n', '<C-c>', 'win_gettype() ==# "quickfix" ? ":cclose<CR>" : ":copen<CR>"',
   { expr = true, silent = true })
 
@@ -65,8 +54,8 @@ vim.keymap.set('n', '<Leader>st', ':CtrlSFToggle<CR>', { noremap = true, silent 
 
 
 nmap("<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-nmap("<C-l>", ":bnext<CR>")
-nmap("<C-h>", ":bprevious<CR>")
+vim.keymap.set('n', '<C-l>', ':bnext<CR>', { silent = true })
+vim.keymap.set('n', '<C-h>', ':bprevious<CR>', { silent = true })
 
 nmap("<leader>z", ":qa<CR>", { silent = true })
 -- Remap for dealing with word wrap

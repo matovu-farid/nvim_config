@@ -14,17 +14,17 @@ local function luasnip_mappings()
   
   -- jumping backward in a snippet
   imap('i', '<S-Tab>', "<cmd>lua require'luasnip'.jump(-1)<Cr>", { silent = true })
-  vim.keymap.set({'i','n'}, '<C-k>', function()
+  vim.keymap.set({'i'}, '<C-k>', function()
     if luasnip.expand_or_jumpable() then
       return "<Plug>luasnip-expand-or-jump"
     end
   end, { silent = true, expr = true, desc = "Expand snippet" })
-  vim.keymap.set({'i','n'}, '<C-j>', function()
+  vim.keymap.set({'i'}, '<C-j>', function()
     if luasnip.jumpable(-1) then
       return luasnip.jump(-1)
     end
   end, { silent = true, expr = true, desc = "Jump back" })
-  vim.keymap.set({'i','n'}, '<C-l>', function()
+  vim.keymap.set({'i'}, '<C-l>', function()
     if luasnip.choice_active() then
       print("choice active")
       return "<cmd>lua require'luasnip'.change_choice(1)<Cr>"

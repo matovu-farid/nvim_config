@@ -25,13 +25,28 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
-require("snips.c")
-require("snips.python")
+
+ls.add_snippets("python", {
+	s("cp", fmt([[
+import sys
+
+def solve():
+    {}
 
 
+if __name__ == "__main__":
+    if 'ONLINE_JUDGE' not in sys.argv:
+        sys.stdin = open('.input', 'r')
 
-ls.add_snippets("lua",{
-	parse("lf", "local $1 = function($2)\n  $0\nend"),
-	s("req", fmt("local {} = require('{}')",{i(1,"default"), rep(1)}))
+    {}
 
+
+  ]], { i(2, "# Your solution logic goes here"), c(1, { t("    solve()"), t({
+		"",
+		"    tests = int(input())",
+		"    for _ in range(tests):",
+		"        solve()",
+	}) })
+	}
+	))
 })

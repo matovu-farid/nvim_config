@@ -73,8 +73,8 @@ require('lazy').setup({
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
-  {'hrsh7th/cmp-path'},
-  {"onsails/lspkind.nvim"},
+  { 'hrsh7th/cmp-path' },
+  { "onsails/lspkind.nvim" },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -110,6 +110,7 @@ require('lazy').setup({
       },
     },
   },
+  { 'kristijanhusak/vim-dadbod-completion' },
 
   {
     -- Add a shades of purple theme
@@ -193,12 +194,12 @@ require('lazy').setup({
       -- vim.cmd.colorscheme 'tokyonight'
       --
       require('tokyonight').setup({
-          transparent = true,
-          styles = {
-            sidebars = "transparent",
-            floats = "transparent",
-          }
-        
+        transparent = true,
+        styles = {
+          sidebars = "transparent",
+          floats = "transparent",
+        }
+
       })
     end,
 
@@ -252,6 +253,10 @@ require('lazy').setup({
     },
 
   },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
 
   {
     -- Add indentation guides even on blank lines
@@ -259,7 +264,6 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     opts = {
-      show_trailing_blankline_indent = true,
     },
   },
   { 'dart-lang/dart-vim-plugin' },
@@ -477,7 +481,7 @@ require('lazy').setup({
           'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
           'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
           'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline', 'Pmenu', 
+          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline', 'Pmenu',
           'TabLineFill', 'TabLineSel', 'TabLine', 'TabLineFill', 'TabLineSel',
 
 
