@@ -1,10 +1,7 @@
 local Split = require("nui.split")
 local event = require("nui.utils.autocmd").event
--- Set the key mapping
 local group = vim.api.nvim_create_augroup("algorithms", {
   clear = true })
-
-
 
 
 local output_lines = {}
@@ -16,6 +13,14 @@ local function on_stdout(_, data, _)
     if #output_lines >= 100 then
       vim.fn.jobstop(job_id)
       break
+    end
+  end
+end
+local function on_error(_, data, _)
+  if data then
+    for _, line in ipairs(data) do
+      print(line)
+      table.insert(output_lines,line)
     end
   end
 end
@@ -48,9 +53,6 @@ local function clone_input(input_bfr)
     file:close()
   end
 end
-
-
-
 
 local function show_split(split, main_buf)
   split:mount()
@@ -106,7 +108,7 @@ local function run_main(job, bufs)
     job_id = vim.fn.jobstart(job, {
       on_stdout = on_stdout,
       on_exit = on_exit(bufs.output),
-      on_error = on_stdout,
+       on_stderr = on_error,
     })
     output_lines = {}
   end

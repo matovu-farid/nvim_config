@@ -23,9 +23,11 @@ require('copilot').setup({
       accept = "<C-y>",
       accept_word = false,
       accept_line = false,
-      next = "<Down>",
-      prev = "<Up>",
-      dismiss = "<C-]>",
+      dismiss = "<Esc>",
+
+      next = "<C-]>",
+      prev = "<C-[>",
+    
     },
   },
   filetypes = {
