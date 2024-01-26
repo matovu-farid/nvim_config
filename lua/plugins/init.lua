@@ -52,7 +52,7 @@ require('lazy').setup({
         "akinsho/toggleterm.nvim",
         config = function()
           require("toggleterm").setup({
-            direction = 'float',
+            direction = 'right',
 
           })
         end
@@ -64,6 +64,9 @@ require('lazy').setup({
   },
   {
     "L3MON4D3/LuaSnip",
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
     dependencies = { "rafamadriz/friendly-snippets" },
   },
   { 'honza/vim-snippets' },
@@ -85,17 +88,19 @@ require('lazy').setup({
       })
     end
   },
-  {
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup()
-    end,
-  },
+ 
   { "lewis6991/gitsigns.nvim" },
   { "m4xshen/autoclose.nvim" },
+  { 'christoomey/vim-tmux-navigator' },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',   opts = {} },
+  {
+    'folke/which-key.nvim',
+    opts = {},
+    config = function()
+      require('which-key').setup {}
+    end
+  },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -240,17 +245,9 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-        globalstatus = true,
-
-      },
-    },
+    config = function()
+      require('lualine').setup({})
+    end
 
   },
   {
@@ -276,6 +273,13 @@ require('lazy').setup({
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
   -- requirements installed.
+
+
+
+  {
+    '/usr/local/opt/fzf',
+
+  },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     -- NOTE: If you are having trouble with this installation,
@@ -374,7 +378,7 @@ require('lazy').setup({
           follow_current_file = true,
         },
         window = {
-          position = "float",
+          position = "right",
           width = 30,
         },
         filesystem = {
@@ -414,7 +418,28 @@ require('lazy').setup({
   },
   { "mbbill/undotree" },
   { 'neovim/nvim-lspconfig' },
-  { 'jose-elias-alvarez/null-ls.nvim' },
+  { 'nvimtools/none-ls.nvim' },
+  {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  },
   { 'MunifTanjim/prettier.nvim' },
   { 'maxmellon/vim-jsx-pretty' },
   { 'mfussenegger/nvim-dap' },
@@ -440,10 +465,16 @@ require('lazy').setup({
       vim.opt.termguicolors = true
       require("bufferline").setup {
         options = {
-          separator_style = "slant",
+          separator_style = "slope",
+          diagnostics = "nvim_lsp",
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            if context.buffer:current() then
+              return ''
+            end
+
+            return ''
+          end,
         },
-
-
       }
     end
   },
@@ -459,7 +490,7 @@ require('lazy').setup({
     }
   },
   { "ThePrimeagen/harpoon" },
-  { "mattn/emmet-vim" },
+  -- { "mattn/emmet-vim" },
 
   { "rafamadriz/friendly-snippets" },
   {

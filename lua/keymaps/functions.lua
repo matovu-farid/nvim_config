@@ -10,4 +10,8 @@ function new_file()
   vim.cmd("saveas " .. filename)
 end
 
-vim.api.nvim_set_keymap("n", "%", ":lua new_file()<CR>", { noremap = true })
+function printTable(table)
+  print(vim.inspect(table))
+end
+
+vim.api.nvim_set_keymap("n", "<leader>nf", ":lua new_file()<CR>", { noremap = true })

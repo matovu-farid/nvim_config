@@ -44,7 +44,7 @@ using ll = long long;
 
 using namespace std;
 void solve() {{
-{}
+  {}
 }}
 int main() {{
 #ifndef ONLINE_JUDGE
@@ -192,5 +192,121 @@ public:
 		}}
 
 	]],{})),
+  s("segmenttree",fmt([[
+  struct segmenttree {{
+  vector<int> st;
+  int n;
+  void init(int n) {{
+    this->n = n;
+    st.resize(4 * n, 0);
+  }}
+
+  int query(int l, int r) {{
+    return query(0, n - 1,0, l, r);
+  }}
+  int query(int start, int ending, int node, int l, int r){{
+    if (ending < l or r < start) return 0;
+    if (start >= l and ending <= r) return st[node];
+    int mid = start + (ending - start) / 2;
+    return query(start, mid, 2 * node + 1, l, r) + query(mid + 1, ending, 2 * node + 2, l , r);
+  }}
+
+  void update(int start, int ending, int node, int idx, int val){{
+    if (start == ending) {{
+      st[node] = val;
+      return;
+    }}
+    int mid = start + (ending - start) / 2;
+    if (idx >= start and idx <= mid){{
+      update(start, mid, 2 * node + 1, idx, val);
+    }}else {{
+      update(mid + 1, ending, 2 * node + 2, idx, val);
+    }}
+    st[node] = st[2 * node + 1] + st[2 * node + 2];
+  }}
+  void build(int start, int ending, int node, vector<int> &v) {{
+    if (start == ending) {{
+      st[node] = v[start];
+      return;
+    }}
+    int mid = start + (ending - start) / 2;
+    build(start, mid, 2 * node + 1, v);
+    build(mid + 1, ending, 2 * node + 2, v);
+    st[node] = st[2 * node + 1] + st[2 * node + 2];
+  }}
+
+  void build(vector<int> &v) {{
+    build(0, n - 1, 0, v);
+  }}
+  void update(int idx, int val){{
+    update(0, n - 1, 0, idx, val);
+  }}
+}};
+
+  ]],{})),
+  s("segmenttreelazy",fmt([[
+struct segmenttree {{
+  vector<int> st, lazy;
+
+  int n;
+  void init(int n) {{
+    this->n = n;
+    st.resize(4 * n, 0);
+    lazy.resize(4 * n, 0);
+  }}
+
+  void flush(int start, int ending, int node) {{
+    int lazyVal = lazy[node];
+    st[node] += lazyVal * (ending - start + 1);
+    lazy[node] = 0;
+    if (start == ending)
+      return;
+    lazy[2 * node + 1] += lazyVal;
+    lazy[2 * node + 2] += lazyVal;
+  }}
+  int query(int start, int ending, int node, int l, int r) {{
+    if (ending < l or r < start)
+      return 0;
+    flush(start, ending, node);
+    if (start >= l and ending <= r) {{
+      return st[node];
+    }}
+    int mid = start + (ending - start) / 2;
+    return query(start, mid, 2 * node + 1, l, r) +
+           query(mid + 1, ending, 2 * node + 2, l, r);
+  }}
+  void update(int start, int ending, int node, int l, int r, int val) {{
+    if (ending < l or r < start)
+      return;
+    flush(start, ending, node);
+    if (start >= l and ending <= r) {{
+      lazy[node] += val;
+      flush(start, ending, node);
+      return;
+    }}
+    int mid = start + (ending - start) / 2;
+    update(start, mid, 2 * node + 1, l, r, val);
+    update(mid + 1, ending, 2 * node + 2, l, r, val);
+    st[node] = st[2 * node + 1] + st[2 * node + 2];
+  }}
+
+  void build(int start, int ending, int node, vector<int> &v) {{
+    if (start == ending) {{
+      st[node] = v[start];
+      return;
+    }}
+    int mid = start + (ending - start) / 2;
+    build(start, mid, 2 * node + 1, v);
+    build(mid + 1, ending, 2 * node + 2, v);
+    st[node] = st[2 * node + 1] + st[2 * node + 2];
+  }}
+
+  int query(int l, int r) {{ return query(0, n - 1, 0, l, r); }}
+  void build(vector<int> &v) {{ build(0, n - 1, 0, v); }}
+  void update(int l, int r, int val) {{ update(0, n - 1, 0, l, r, val); }}
+}};
+
+
+  ]],{}))
 
 })

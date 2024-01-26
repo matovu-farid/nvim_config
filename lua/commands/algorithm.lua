@@ -3,7 +3,7 @@ local event = require("nui.utils.autocmd").event
 local group = vim.api.nvim_create_augroup("algorithms", {
   clear = true })
 
-
+vim.api.nvim_set_hl(0, "AlgoError", { fg = "red", bg = "none" })
 local output_lines = {}
 local job_id = nil
 local function on_stdout(_, data, _)
@@ -16,11 +16,12 @@ local function on_stdout(_, data, _)
     end
   end
 end
-local function on_error(_, data, _)
-  if data then
-    for _, line in ipairs(data) do
-      print(line)
-      table.insert(output_lines,line)
+local function on_error(output)
+  return function(_, data, _)
+    if data then
+      for _, line in ipairs(data) do
+        table.insert(output_lines, line)
+      end
     end
   end
 end
@@ -108,25 +109,43 @@ local function run_main(job, bufs)
     job_id = vim.fn.jobstart(job, {
       on_stdout = on_stdout,
       on_exit = on_exit(bufs.output),
-       on_stderr = on_error,
+      on_stderr = on_error(bufs.output),
     })
     output_lines = {}
   end
 end
 
+
 local function create_runner(job)
+  local function close_runner(bufs)
+  return function()
+    vim.api.nvim_buf_delete(bufs.output, { force = true })
+    vim.api.nvim_buf_delete(bufs.input, { force = true })
+    vim.keymap.del("n", "<leader>.")
+    vim.keymap.set("n", "<leader>x",
+      create_runner(job)
+      , { silent = true, desc = "Run" })
+  end
+end
   return function()
     local main_file = vim.api.nvim_get_current_buf()
     vim.api.nvim_command("Copilot disable")
-    vim.keymap.set("n", "<leader>x", run_main(job, create_splits(main_file)),
+    local splits = create_splits(main_file)
+    local run = run_main(job, splits)
+    vim.keymap.set("n", "<leader>x", run,
       { silent = true, desc = "Run file" })
+    vim.keymap.set("n", "<leader>.", close_runner(splits),
+      { silent = true, desc = "Close Runner" })
+    run()
   end
 end
 local function init_algo()
   local file_extension = vim.fn.expand("%:e")
+  local file_name = vim.fn.expand("%:t")
   local jobs = {
-    cpp = { "crun", "main.cpp" },
-    py = { "prun", "main.py" },
+    cpp = { "crun", file_name},
+    c = { "crun", file_name},
+    py = { "prun", file_name },
   }
   local job = jobs[file_extension]
 
@@ -140,6 +159,3 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*",
   callback = init_algo,
 })
-
-
-

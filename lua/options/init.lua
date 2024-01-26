@@ -41,10 +41,13 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
-vim.wo.foldmethod = "indent"
 vim.wo.foldenable = false
+vim.wo.foldmethod="expr"
+vim.wo.foldexpr="nvim_treesitter#foldexpr()"
 
 vim.o.splitright = true
+vim.o.splitbelow = true
+
 
 vim.o.scrolloff = 5
 vim.o.autoread = true

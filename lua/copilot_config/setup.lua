@@ -1,4 +1,3 @@
-
 require('copilot').setup({
   panel = {
     enabled = true,
@@ -27,7 +26,7 @@ require('copilot').setup({
 
       next = "<C-]>",
       prev = "<C-[>",
-    
+
     },
   },
   filetypes = {
@@ -44,4 +43,14 @@ require('copilot').setup({
   copilot_node_command = 'node', -- Node.js version must be > 16.x
   server_opts_overrides = {},
 })
-
+-- function get_api_key()
+--   local handle = io.popen("ansible-vault view --vault-pass-file=~/.password.txt ~/.chatgpt_key.txt")
+--   local result = handle:read("*a")
+--   print(result)
+--   handle:close()
+--   return result
+-- end
+--
+require("chatgpt").setup({
+  api_key_cmd = "bash /usr/local/bin/get_openai_key",
+})

@@ -30,7 +30,7 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', '<leader>ca', "<cmd>Lspsaga code_action<CR>", { silent = true, desc = '[C]ode [A]ction' })
   vim.keymap.set('n','gd', "<cmd>Lspsaga goto_definition<CR>", { silent = true, desc = '[G]oto [D]efinition' })
   vim.keymap.set('n','gT', "<cmd>Lspsaga peek_type_definition<CR>" , { silent = true, desc = '[G]oto [T]ype' })
-  vim.keymap.set('n','gr', "<cmd>Lspsaga rename ++project<CR>",  { silent = true, desc = '[G]oto [R]eferences' })
+  
   vim.keymap.set('n','gI', vim.lsp.buf.implementation, { silent = true, desc = '[G]oto [I]mplementation' })
   vim.keymap.set('n','<leader>D', vim.lsp.buf.type_definition, { silent = true, desc = '[D]efinition' })
   vim.keymap.set('n','<leader>ds', require('telescope.builtin').lsp_document_symbols, { silent = true, desc = '[D]ocument [S]ymbols' })
