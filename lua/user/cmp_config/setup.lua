@@ -1,9 +1,9 @@
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-vim.cmd [[
-  autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
-]]
+-- vim.cmd [[
+--   autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+-- ]]
 
 luasnip.config.setup {}
 local lspkind = require('lspkind')
@@ -47,7 +47,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'buffer' },
+    -- { name = 'buffer' },
   },
   completion = {
     completeopt = 'menu,menuone,noselect',
@@ -69,19 +69,19 @@ cmp.setup {
       return kind
     end,
   },
-  sorting = {
-    comparators = {
-      cmp.config.compare.score,
-      cmp.config.compare.offset,
-      cmp.config.compare.recently_used,
-      cmp.config.compare.exact,
-      cmp.config.compare.kind,
-      cmp.config.compare.scopes,
-      -- cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    }
-  },
+  -- sorting = {
+  --   comparators = {
+  --     cmp.config.compare.score,
+  --     cmp.config.compare.offset,
+  --     cmp.config.compare.recently_used,
+  --     cmp.config.compare.exact,
+  --     cmp.config.compare.kind,
+  --     cmp.config.compare.scopes,
+  --     -- cmp.config.compare.sort_text,
+  --     cmp.config.compare.length,
+  --     cmp.config.compare.order,
+  --   }
+  -- },
 
   enabled = function()
     -- disable completion in comments
@@ -95,9 +95,3 @@ cmp.setup {
     end
   end
 }
--- If you want insert `(` after select function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)

@@ -8,6 +8,14 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true
 }
 local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+-- find and delete tsserver from the table of language servers
+for i, ls in ipairs(language_servers) do
+    if ls == 'tsserver' then
+        table.remove(language_servers, i)
+        break
+    end
+end
+
 for _, ls in ipairs(language_servers) do
     require('lspconfig')[ls].setup({
         capabilities = capabilities
@@ -75,7 +83,7 @@ lspconfig.dartls.setup {
   end
 }
 lspconfig.emmet_language_server.setup({
-  filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact" },
+  filetypes = { "css", "eruby", "html",  "less", "sass", "scss", "pug",  },
   -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
   -- **Note:** only the options listed in the table are supported.
   init_options = {
@@ -97,3 +105,10 @@ lspconfig.emmet_language_server.setup({
     variables = {},
   },
 })
+-- require("lspconfig").tsserver.setup{
+--   settings = {
+--     implicitProjectConfiguration = { 
+--       checkJs = true
+--     },
+--   }
+-- }

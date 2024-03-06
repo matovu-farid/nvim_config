@@ -5,15 +5,14 @@ vim.keymap.set('n', '<leader>oe', builtin.buffers, { desc = '[ ] Find existing b
 vim.keymap.set('n', '<leader>/', ':Telescope current_buffer_fuzzy_find<CR>',
   { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader><space>', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>st', builtin.lsp_document_symbols, { desc = '[S]earch [T]ags' })
-vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { desc = '[S]earch [R]eferences' })
-vim.keymap.set('n', '<leader>ss', builtin.lsp_dynamic_workspace_symbols,
-  { desc = '[S]earch [S]ymbols in workspace' })
+-- vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = '[S]earch [F]iles' })
+-- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+-- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+-- vim.keymap.set('n', '<leader><space>', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+-- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+-- vim.keymap.set('n', '<leader>st', builtin.lsp_document_symbols, { desc = '[S]earch [T]ags' })
+-- vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { desc = '[S]earch [R]eferences' })
+
 vim.keymap.set('n', '<leader>en', ':Telescope find_files cwd=~/.config/nvim/lua/user<CR>',
   { desc = '[E]dit neovim' })
 vim.keymap.set('n', '<leader>sn', ':Telescope live_grep cwd=~/.config/nvim/lua/user<CR>',
@@ -42,4 +41,3 @@ function _G.import_based_on_word()
   end
 end
 
-vim.api.nvim_set_keymap('n', '<leader>i', ':lua import_based_on_word()<CR>', { noremap = true, silent = true })

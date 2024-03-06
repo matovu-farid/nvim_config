@@ -25,4 +25,6 @@ telescope.setup {
       previewer = false,
     },
   },
+  extensions = {
+  }
 }

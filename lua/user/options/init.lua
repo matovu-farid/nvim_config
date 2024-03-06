@@ -7,7 +7,8 @@ vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
-vim.opt.swapfile = false
+-- vim.opt.swapfile = false
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.opt.termguicolors = true
 -- Set completeopt to have a better completion experience
@@ -60,3 +61,4 @@ vim.o.expandtab = true
 vim.o.showmatch = true
 vim.o.smartindent = true
 vim.wo.linebreak = true
+

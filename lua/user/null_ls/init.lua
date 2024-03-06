@@ -14,6 +14,14 @@ null_ls.setup({
         null_ls.builtins.diagnostics.rubocop,
         null_ls.builtins.diagnostics.standardrb,
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.erb_format
+        null_ls.builtins.formatting.erb_format,
+        null_ls.builtins.code_actions.cspell,
+        null_ls.builtins.code_actions.refactoring,
+        null_ls.builtins.diagnostics.rubocop,
+        null_ls.builtins.formatting.rubocop,
+        null_ls.builtins.code_actions.refactoring,
+        null_ls.builtins.diagnostics.erb_lint,
+        null_ls.builtins.formatting.erb_format,
+        null_ls.builtins.formatting.erb_lint
     },
 })

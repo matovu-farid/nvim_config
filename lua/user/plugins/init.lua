@@ -97,14 +97,14 @@ require('lazy').setup({
     end
 
   },
-  {
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup {
-        debounce_delay = 20000,
-      }
-    end,
-  },
+  -- {
+  --   "Pocco81/auto-save.nvim",
+  --   config = function()
+  --     require("auto-save").setup {
+  --       trigger_events = {"BufLeave"},
+  --     }
+  --   end,
+  -- },
   { "lewis6991/gitsigns.nvim" },
   { "m4xshen/autoclose.nvim" },
   { 'christoomey/vim-tmux-navigator' },
@@ -118,6 +118,14 @@ require('lazy').setup({
     end
   },
   {
+    'tmillr/sos.nvim',
+    config = function()
+      require('sos').setup({
+
+      })
+    end
+  },
+  {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
@@ -127,7 +135,18 @@ require('lazy').setup({
     }
   },
   {
-    -- Adds git releated signs to the gutter, as well as utilities for managing changes
+    'rmagatti/auto-session',
+    config = function()
+      require('auto-session').setup({})
+    end
+  },
+  
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    ft = { 'rust' },
+  },
+  {
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -227,7 +246,7 @@ require('lazy').setup({
     end,
 
   },
-  {'kevinhwang91/nvim-ufo', dependencies={'kevinhwang91/promise-async'}},
+  { 'kevinhwang91/nvim-ufo',               dependencies = { 'kevinhwang91/promise-async' } },
 
   {
     -- Theme inspired by Tokyonight
@@ -309,9 +328,48 @@ require('lazy').setup({
     'JoosepAlviste/nvim-ts-context-commentstring',
   },
   { 'Mohammed-Taher/AdvancedNewFile.nvim' },
+  {
+    'ghostbuster91/nvim-next',
+    config = function()
+      local nvim_next_builtins = require("nvim-next.builtins")
+      require("nvim-next").setup({
+        default_mappings = {
+          repeat_style = "original",
+        },
+        items = {
+          nvim_next_builtins.f,
+          nvim_next_builtins.t
+        }
+      })
+    end
+  },
 
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim',      version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  {
+    'nvim-telescope/telescope.nvim',
+    version = '*',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-github.nvim',
+      'nvim-telescope/telescope-media-files.nvim',
+      'cljoly/telescope-repo.nvim',
+      'gbrlsnchs/telescope-lsp-handlers.nvim',
+      'fbuchlak/telescope-directory.nvim',
+      'danielvolchek/tailiscope.nvim',
+      'debugloop/telescope-undo.nvim',
+      'jackMort/ChatGPT.nvim'
+    },
+    config = function(_, opts)
+      local telescope = require('telescope')
+      telescope.load_extension('gh')
+      telescope.load_extension('media_files')
+      telescope.load_extension('repo')
+      telescope.load_extension('lsp_handlers')
+      telescope.load_extension('directory')
+      telescope.load_extension('tailiscope')
+      telescope.load_extension("undo")
+    end
+  },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -319,7 +377,7 @@ require('lazy').setup({
 
 
 
-  
+
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     -- NOTE: If you are having trouble with this installation,
@@ -536,6 +594,16 @@ require('lazy').setup({
 
   { "rcarriga/nvim-notify" },
   {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+    config = function()
+      require("typescript-tools").setup({
+       
+      })
+    end,
+  },
+  {
     "xiyaowong/transparent.nvim",
     config = function()
       require("transparent").setup({
@@ -544,8 +612,9 @@ require('lazy').setup({
           'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
           'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
           'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline', 'Pmenu',
+          'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'tabline',
           'TabLineFill', 'TabLineSel', 'TabLine', 'TabLineFill', 'TabLineSel',
+          'Pmenu',
 
 
         },
